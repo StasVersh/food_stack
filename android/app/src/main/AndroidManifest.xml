@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.savaapplication.food_stack">
    <application
-        android:label="food_stack"
+        android:label="FoodStack"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

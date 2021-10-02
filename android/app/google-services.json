@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "870874965552",
+    "project_id": "foodstack-cf1df",
+    "storage_bucket": "foodstack-cf1df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870874965552:android:62108890655bf29ac26ff5",
+        "android_client_info": {
+          "package_name": "com.savaapplication.food_stack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870874965552-mfkkhhrr9qn3rdnouuhpd42gt8f7di2r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4mwkt4QgDq3TOw9RXLrrEI70VE9G1c2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870874965552-mfkkhhrr9qn3rdnouuhpd42gt8f7di2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
