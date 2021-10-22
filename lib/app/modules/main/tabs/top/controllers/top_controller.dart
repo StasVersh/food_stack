@@ -25,14 +25,17 @@ class TopController extends GetxController {
 
   @override
   void onInit() {
-    _recipeService.getRecipes().then((value) => recipes.value = value);
+    updateRecipes();
     super.onInit();
+  }
+
+  void updateRecipes() {
+    recipes.clear();
+    _recipeService.getRecipes().then((value) => recipes.value = value);
   }
 
   @override
   void onReady() {
-    recipes.value = recipes.value.reversed.toList();
-    print('SDGzdfhDFH' + recipes.value.toString());
     super.onReady();
   }
 

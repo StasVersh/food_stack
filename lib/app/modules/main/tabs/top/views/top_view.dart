@@ -13,6 +13,14 @@ class TopView extends GetView<TopController> {
         backgroundColor: AppColors.appCherry,
         title: Text(LocaleKeys.top100.tr),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: controller.updateRecipes,
+            icon: Icon(
+              Icons.refresh,
+            ),
+          )
+        ],
       ),
       body: Obx(
         () {
