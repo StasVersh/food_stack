@@ -3,7 +3,6 @@ import 'package:food_stack/app/modules/add_recipe/views/add_recipe_view.dart';
 import 'package:food_stack/app/modules/main/bindings/main_binding.dart';
 import 'package:food_stack/app/modules/main/views/main_view.dart';
 import 'package:food_stack/app/modules/recipe_review/bindings/recipe_review_binding.dart';
-import 'package:food_stack/app/modules/recipe_review/controllers/recipe_review_controller.dart';
 import 'package:food_stack/app/modules/recipe_review/views/recipe_review_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 

@@ -16,6 +16,10 @@ class RecipeService {
   Future<List<Recipe>> getRecipes() async {
     var recipesData =
         await _firebaseDatabase.collection(DatabasePaths.recipePath).get();
-    return recipesData.docs.map((e) => Recipe.fromDataset(e)).toList();
+    return recipesData.docs
+        .map((e) => Recipe.fromDataset(e))
+        .toList()
+        .reversed
+        .toList();
   }
 }

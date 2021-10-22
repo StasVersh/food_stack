@@ -1,35 +1,29 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:food_stack/app/core/services/recipe_service.dart';
-import 'package:food_stack/app/data/model/recipe.dart';
-import 'package:food_stack/app/modules/main/widgets/recipe_card.dart';
-import 'package:food_stack/app/routes/app_pages.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:food_stack/app/modules/main/tabs/favorites/views/favorites_view.dart';
+import 'package:food_stack/app/modules/main/tabs/my_recipes/views/my_recipes_view.dart';
+import 'package:food_stack/app/modules/main/tabs/search/views/search_view.dart';
+import 'package:food_stack/app/modules/main/tabs/top/views/top_view.dart';
+import 'package:food_stack/app/modules/main/tabs/user/views/user_view.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
-  final RecipeService _recipeService;
-  late final recipes = <Recipe>[].obs;
+  final selectedIconIndex = 1.obs;
+  final List<Widget> pages = [
+    SearchView(),
+    TopView(),
+    FavoritesView(),
+    MyRecipesView(),
+    UserView(),
+  ].obs;
 
-  MainController(this._recipeService);
-
-  void addRecipe() async {
-    var newRecipe = await Get.toNamed(Routes.ADDRECIPE);
-    if (newRecipe != null) {
-      recipes.add(newRecipe);
-    }
+  void onTapIcon(int index) {
+    selectedIconIndex.value = index;
   }
 
-  void toRecipeReview(int index) {
-    print('sdgfklhj');
-    Get.toNamed(
-      Routes.RECIPEREVIEW,
-      arguments: recipes[index],
-    );
-  }
+  MainController();
 
   @override
   void onInit() {
-    _recipeService.getRecipes().then((value) => recipes.value = value);
-    recipes.value.sort();
     super.onInit();
   }
 

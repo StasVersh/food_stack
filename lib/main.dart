@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/modules/main/tabs/top/controllers/top_controller.dart';
+import 'package:food_stack/app/modules/main/tabs/top/views/top_view.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
 import 'package:intl/intl.dart';
@@ -46,4 +48,5 @@ Future initServices() async {
       permanent: true);
   Get.put<FirebaseFirestore>(FirebaseFirestore.instance, permanent: true);
   Get.put<RecipeService>(RecipeService(Get.find()), permanent: true);
+  Get.put<TopController>(TopController(Get.find()), permanent: true);
 }
