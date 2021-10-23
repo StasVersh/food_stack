@@ -20,7 +20,8 @@ class MyRecipeCard extends Card {
                 ),
                 ListTile(
                   title: Text(recipe.title),
-                  subtitle: Text('19/10/2021'),
+                  subtitle: Text(
+                      '${recipe.createDate.day}/${recipe.createDate.month}/${recipe.createDate.year}'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

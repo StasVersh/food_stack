@@ -9,7 +9,7 @@ class RecipeReviewView extends GetView<RecipeReviewController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appCherry,
-        title: Text('Add Recipe'),
+        title: Text(controller.recipe.title),
         centerTitle: true,
         actions: [
           IconButton(

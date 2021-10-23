@@ -2,9 +2,9 @@ import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:get/get.dart';
 
 class RecipeReviewController extends GetxController {
-  final Recipe _recipe;
+  final Recipe recipe;
 
-  RecipeReviewController(this._recipe);
+  RecipeReviewController(this.recipe);
 
   @override
   void onInit() {

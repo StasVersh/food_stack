@@ -12,7 +12,7 @@ class MyRecipesController extends GetxController {
   void addRecipe() async {
     var newRecipe = await Get.toNamed(Routes.ADDRECIPE);
     if (newRecipe != null) {
-      recipes.add(newRecipe);
+      recipes.insert(0, newRecipe);
     }
   }
 
@@ -31,7 +31,7 @@ class MyRecipesController extends GetxController {
 
   void updateRecipes() {
     recipes.clear();
-    _recipeService.getRecipes().then((value) => recipes.value = value);
+    _recipeService.getMyRecipes().then((value) => recipes.value = value);
   }
 
   @override

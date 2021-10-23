@@ -33,11 +33,11 @@ class TopView extends GetView<TopController> {
                         right: 8.0,
                       ),
                       child: RecipeCard(
+                        color: controller.favoritesColor,
                         recipe: controller.recipes[index],
                         index: index + 1,
-                        onPress: () {
-                          controller.toRecipeReview(index);
-                        },
+                        onPress: () {},
+                        onFavorites: () => controller.favorites(index),
                       ),
                     );
                   },

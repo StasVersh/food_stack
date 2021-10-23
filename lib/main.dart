@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/modules/main/tabs/favorites/controllers/favorites_controller.dart';
+import 'package:food_stack/app/modules/main/tabs/favorites/views/favorites_view.dart';
 import 'package:food_stack/app/modules/main/tabs/my_recipes/controllers/my_recipes_controller.dart';
 import 'package:food_stack/app/modules/main/tabs/top/controllers/top_controller.dart';
 import 'package:food_stack/app/modules/main/tabs/top/views/top_view.dart';
@@ -11,6 +13,7 @@ import 'package:get/get.dart';
 import 'dart:ui' as ui;
 import 'package:intl/intl.dart';
 import 'app/core/values/app_translations.dart';
+import 'app/data/model/recipe.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter/services.dart';
 
@@ -50,6 +53,8 @@ Future initServices() async {
   Get.put<FirebaseFirestore>(FirebaseFirestore.instance, permanent: true);
   Get.put<RecipeService>(RecipeService(Get.find()), permanent: true);
   Get.put<TopController>(TopController(Get.find()), permanent: true);
+  Get.put<FavoritesController>(FavoritesController(Get.find()),
+      permanent: true);
   Get.put<MyRecipesController>(MyRecipesController(Get.find()),
       permanent: true);
 }

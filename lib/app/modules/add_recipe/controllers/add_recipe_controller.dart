@@ -7,6 +7,7 @@ class AddRecipeController extends GetxController {
   final RecipeService _recipeService;
   final String title = 'Роллото Боно';
   final String body = 'Что-то там сделать чтобы получились налесники';
+  final isFavorite = false;
   final List<IngredientType> ingredients = [
     IngredientType.egg,
     IngredientType.flour
@@ -16,10 +17,10 @@ class AddRecipeController extends GetxController {
   AddRecipeController(this._recipeService);
 
   void save() {
-    var newRecipe = Recipe(title, body, ingredients, url);
+    var newRecipe = Recipe(title, body, ingredients, url, isFavorite);
     _recipeService.addRecipe(newRecipe);
     Get.back<Recipe>(
-      result: Recipe(title, body, ingredients, url),
+      result: Recipe(title, body, ingredients, url, isFavorite),
     );
   }
 

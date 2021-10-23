@@ -44,7 +44,7 @@ class MyRecipesView extends GetView<MyRecipesController> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: controller.addRecipe,
         child: Icon(Icons.add),
       ),
     );
