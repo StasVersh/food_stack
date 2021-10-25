@@ -11,14 +11,10 @@ class Recipe {
   final String body;
   final List<IngredientType> ingredients;
   final String picture;
-  String id = '';
+  final String id;
   DateTime createDate = DateTime.now();
-  final bool isFavorite;
 
-  Recipe(
-      this.title, this.body, this.ingredients, this.picture, this.isFavorite) {
-    id = DateTime.now().toString();
-  }
+  Recipe(this.title, this.body, this.ingredients, this.picture, this.id);
 
   factory Recipe.fromDataset(QueryDocumentSnapshot dataSnapshot) {
     return Recipe.fromJson(

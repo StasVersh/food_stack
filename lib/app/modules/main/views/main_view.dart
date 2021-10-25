@@ -30,12 +30,12 @@ class MainView extends GetView<MainController> {
                 label: LocaleKeys.top100.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.star),
-                label: LocaleKeys.favorite.tr,
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.receipt),
                 label: LocaleKeys.myRecipes.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.star),
+                label: LocaleKeys.favorite.tr,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle),

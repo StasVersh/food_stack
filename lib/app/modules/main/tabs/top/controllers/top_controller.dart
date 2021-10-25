@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class TopController extends GetxController {
   final RecipeService _recipeService;
-  final favoritesColor = Colors.black26.obs;
   late final recipes = <Recipe>[].obs;
 
   TopController(this._recipeService);
@@ -28,13 +27,7 @@ class TopController extends GetxController {
     );
   }
 
-  void favorites(int index) {
-    if (recipes[index].isFavorite) {
-      favoritesColor.value = AppColors.appCherry;
-    } else {
-      favoritesColor.value = AppColors.appCherry;
-    }
-  }
+  void favorites(int index) {}
 
   @override
   void onInit() {
@@ -42,9 +35,11 @@ class TopController extends GetxController {
     super.onInit();
   }
 
-  void updateRecipes() {
+  Future<void> updateRecipes() {
     recipes.clear();
-    _recipeService.getTopRecipes().then((value) => recipes.value = value);
+    return _recipeService
+        .getTopRecipes()
+        .then((value) => recipes.value = value);
   }
 
   @override

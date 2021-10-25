@@ -7,12 +7,12 @@ import 'package:food_stack/app/modules/main/tabs/user/views/user_view.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
-  final selectedIconIndex = 1.obs;
+  final selectedIconIndex = 2.obs;
   final List<Widget> pages = [
     SearchView(),
     TopView(),
-    FavoritesView(),
     MyRecipesView(),
+    FavoritesView(),
     UserView(),
   ].obs;
 

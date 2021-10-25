@@ -29,9 +29,9 @@ class MyRecipesController extends GetxController {
     super.onInit();
   }
 
-  void updateRecipes() {
+  Future<void> updateRecipes() {
     recipes.clear();
-    _recipeService.getMyRecipes().then((value) => recipes.value = value);
+    return _recipeService.getMyRecipes().then((value) => recipes.value = value);
   }
 
   @override

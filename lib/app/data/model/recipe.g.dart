@@ -13,10 +13,8 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
           .map((e) => _$enumDecode(_$IngredientTypeEnumMap, e))
           .toList(),
       json['picture'] as String,
-      json['isFavorite'] as bool,
-    )
-      ..id = json['id'] as String
-      ..createDate = DateTime.parse(json['createDate'] as String);
+      json['id'] as String,
+    )..createDate = DateTime.parse(json['createDate'] as String);
 
 Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
       'title': instance.title,
@@ -26,7 +24,6 @@ Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
       'picture': instance.picture,
       'id': instance.id,
       'createDate': instance.createDate.toIso8601String(),
-      'isFavorite': instance.isFavorite,
     };
 
 K _$enumDecode<K, V>(

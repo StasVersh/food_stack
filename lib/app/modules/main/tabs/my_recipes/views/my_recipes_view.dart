@@ -17,23 +17,27 @@ class MyRecipesView extends GetView<MyRecipesController> {
       body: Obx(
         () {
           return controller.recipes.isNotEmpty
-              ? ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        left: 8.0,
-                        right: 8.0,
-                      ),
-                      child: MyRecipeCard(
-                        recipe: controller.recipes[index],
-                        index: index + 1456,
-                        onPress: () {
-                          controller.toRecipeReview(index);
-                        },
-                      ),
-                    );
-                  },
-                  itemCount: controller.recipes.length,
+              ? RefreshIndicator(
+                  color: AppColors.appCherry,
+                  onRefresh: controller.updateRecipes,
+                  child: ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8.0,
+                          right: 8.0,
+                        ),
+                        child: MyRecipeCard(
+                          recipe: controller.recipes[index],
+                          index: index + 1456,
+                          onPress: () {
+                            controller.toRecipeReview(index);
+                          },
+                        ),
+                      );
+                    },
+                    itemCount: controller.recipes.length,
+                  ),
                 )
               : const Center(
                   child: CircularProgressIndicator(

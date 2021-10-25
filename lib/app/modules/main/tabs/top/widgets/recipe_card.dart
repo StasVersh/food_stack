@@ -9,51 +9,48 @@ class RecipeCard extends Card {
     required Recipe recipe,
     required Function onPress,
     required Function onFavorites,
-    required Rx<Color> color,
     required int index,
   }) : super(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
-          child: Obx(() {
-            return InkWell(
-              onTap: onPress(),
-              hoverColor: Colors.black26,
-              splashColor: Colors.black26,
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-                      child: Image.network(recipe.picture),
+          child: InkWell(
+            onTap: onPress(),
+            hoverColor: Colors.black26,
+            splashColor: Colors.black26,
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: Image.network(recipe.picture),
+                  ),
+                  ListTile(
+                    title: Text(recipe.title),
+                    subtitle: Text('Ингридиенты: тесто, перец, ...'),
+                    trailing: IconButton(
+                      splashRadius: 15,
+                      onPressed: () => onFavorites(),
+                      icon: Icon(
+                        Icons.star_border,
+                        color: Colors.black26,
+                      ),
                     ),
-                    ListTile(
-                      title: Text(recipe.title),
-                      subtitle: Text('Ингридиенты: тесто, перец, ...'),
-                      trailing: IconButton(
-                        splashRadius: 15,
-                        onPressed: () => onFavorites(),
-                        icon: Icon(
-                          Icons.star_border,
-                          color: color.value,
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      child: Center(
+                        child: Text(
+                          index.toString(),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
-                      leading: Container(
-                        width: 40,
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                            index.toString(),
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
-            );
-          }),
+            ),
+          ),
         );
 }

@@ -1,5 +1,7 @@
 import 'package:food_stack/app/core/services/recipe_service.dart';
+import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
+import 'package:food_stack/app/data/model/user.dart';
 import 'package:food_stack/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -29,9 +31,11 @@ class FavoritesController extends GetxController {
     super.onInit();
   }
 
-  void updateRecipes() {
-    recipes.clear();
-    _recipeService.getFavoriteRecipes().then((value) => recipes.value = value);
+  Future<void> updateRecipes() {
+    return _recipeService
+        .getFavoriteRecipe()
+        .then((value) => recipes.value = value);
+    ;
   }
 
   @override

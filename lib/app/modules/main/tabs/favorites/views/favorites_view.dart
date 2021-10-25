@@ -14,33 +14,29 @@ class FavoritesView extends GetView<FavoritesController> {
         backgroundColor: AppColors.appCherry,
         title: Text(LocaleKeys.favorite.tr),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: controller.updateRecipes,
-            icon: Icon(
-              Icons.refresh,
-            ),
-          )
-        ],
       ),
       body: Obx(
         () {
           return controller.recipes.isNotEmpty
-              ? ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        left: 8.0,
-                        right: 8.0,
-                      ),
-                      child: FavoritesRecipeCard(
-                        recipe: controller.recipes[index],
-                        index: index + 1,
-                        onPress: () {},
-                      ),
-                    );
-                  },
-                  itemCount: controller.recipes.length,
+              ? RefreshIndicator(
+                  color: AppColors.appCherry,
+                  onRefresh: controller.updateRecipes,
+                  child: ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8.0,
+                          right: 8.0,
+                        ),
+                        child: FavoritesRecipeCard(
+                          recipe: controller.recipes[index],
+                          index: index + 1,
+                          onPress: () {},
+                        ),
+                      );
+                    },
+                    itemCount: controller.recipes.length,
+                  ),
                 )
               : const Center(
                   child: CircularProgressIndicator(

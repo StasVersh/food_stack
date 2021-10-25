@@ -33,7 +33,7 @@ class FavoritesRecipeCard extends Card {
                       onPressed: () {},
                       icon: Icon(
                         Icons.star_border,
-                        color: AppColors.appCherry,
+                        color: Colors.black26,
                       ),
                     ),
                   )

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
+import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/core/values/colors.dart';
 import 'package:food_stack/app/modules/main/tabs/favorites/controllers/favorites_controller.dart';
 import 'package:food_stack/app/modules/main/tabs/favorites/views/favorites_view.dart';
@@ -52,6 +53,7 @@ Future initServices() async {
       permanent: true);
   Get.put<FirebaseFirestore>(FirebaseFirestore.instance, permanent: true);
   Get.put<RecipeService>(RecipeService(Get.find()), permanent: true);
+  Get.put<UserService>(UserService(Get.find()), permanent: true);
   Get.put<TopController>(TopController(Get.find()), permanent: true);
   Get.put<FavoritesController>(FavoritesController(Get.find()),
       permanent: true);
