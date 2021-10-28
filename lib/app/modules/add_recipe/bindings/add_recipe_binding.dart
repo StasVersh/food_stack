@@ -6,7 +6,7 @@ class AddRecipeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AddRecipeController>(
-      () => AddRecipeController(Get.find(), Get.find()),
+      () => AddRecipeController(Get.find()),
     );
   }
 }

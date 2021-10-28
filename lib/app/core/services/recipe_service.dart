@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_stack/app/core/values/database_constants.dart';
+import 'package:food_stack/app/data/model/ingredient_type.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:food_stack/app/data/model/user.dart';
 
@@ -15,7 +16,7 @@ class RecipeService {
     updateRecipe(Recipe(
       recipe.title,
       recipe.body,
-      recipe.ingredients,
+      recipe.ingredientsId,
       recipe.picture,
       recipeData.id,
     ));
@@ -43,25 +44,32 @@ class RecipeService {
   }
 
   Future<List<Recipe>> getFavoriteRecipe() async {
-    List<Recipe> favoriteRecipes = [];
-    var usersData = await _firebaseDatabase
+    var userData = await _firebaseDatabase
         .collection(DatabasePaths.usersPath)
         .doc('5Sq0Ni0MQQOUG0T7K92k')
         .get();
-    List<String> favoriteRecipesId = usersData.get('favorites');
-    for (int i = 0; i < favoriteRecipesId.length; i++) {
-      var recipeData = await _firebaseDatabase
-          .collection(DatabasePaths.usersPath)
-          .doc(favoriteRecipesId[i])
-          .get();
-      favoriteRecipes[i] = Recipe(
-        recipeData.get('title'),
-        recipeData.get('body'),
-        recipeData.get('ingredients'),
-        recipeData.get('picture'),
-        recipeData.get('id'),
-      );
-    }
-    return favoriteRecipes;
+    List<dynamic> recipesId = userData.get('favorites');
+    recipesId = recipesId.cast<String>();
+    List<Recipe> recipes = [];
+    recipesId.forEach(
+      (element) async {
+        var recipeData = await _firebaseDatabase
+            .collection(DatabasePaths.recipePath)
+            .doc(element)
+            .get();
+        List<String> ingredientsId =
+            List<String>.from(recipeData.get('ingredientsId'));
+        recipes.add(
+          Recipe(
+            recipeData.get('title'),
+            recipeData.get('body'),
+            ingredientsId,
+            recipeData.get('picture'),
+            recipeData.get('id'),
+          ),
+        );
+      },
+    );
+    return recipes;
   }
 }

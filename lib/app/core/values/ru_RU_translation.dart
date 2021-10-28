@@ -25,4 +25,5 @@ final Map<String, String> ru_RU = {
   LocaleKeys.desserts: 'Дессерты',
   LocaleKeys.peppery: 'Острое',
   LocaleKeys.fastFood: 'Фаст-фуд',
+  LocaleKeys.addRecipe: 'Создание рецепта',
 };

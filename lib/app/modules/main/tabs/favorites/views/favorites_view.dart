@@ -30,7 +30,7 @@ class FavoritesView extends GetView<FavoritesController> {
                         ),
                         child: FavoritesRecipeCard(
                           recipe: controller.recipes[index],
-                          index: index + 1,
+                          onFavorite: () => controller.onFavorite(index),
                           onPress: () {},
                         ),
                       );

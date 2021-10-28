@@ -54,8 +54,9 @@ Future initServices() async {
   Get.put<FirebaseFirestore>(FirebaseFirestore.instance, permanent: true);
   Get.put<RecipeService>(RecipeService(Get.find()), permanent: true);
   Get.put<UserService>(UserService(Get.find()), permanent: true);
-  Get.put<TopController>(TopController(Get.find()), permanent: true);
-  Get.put<FavoritesController>(FavoritesController(Get.find()),
+  Get.put<TopController>(TopController(Get.find(), Get.find()),
+      permanent: true);
+  Get.put<FavoritesController>(FavoritesController(Get.find(), Get.find()),
       permanent: true);
   Get.put<MyRecipesController>(MyRecipesController(Get.find()),
       permanent: true);

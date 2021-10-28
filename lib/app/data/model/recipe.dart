@@ -9,12 +9,12 @@ class Recipe {
   //flutter pub run build_runner build
   final String title;
   final String body;
-  final List<IngredientType> ingredients;
+  final List<String> ingredientsId;
   final String picture;
   final String id;
-  DateTime createDate = DateTime.now();
+  final DateTime createDate = DateTime.now();
 
-  Recipe(this.title, this.body, this.ingredients, this.picture, this.id);
+  Recipe(this.title, this.body, this.ingredientsId, this.picture, this.id);
 
   factory Recipe.fromDataset(QueryDocumentSnapshot dataSnapshot) {
     return Recipe.fromJson(

@@ -8,7 +8,7 @@ class FavoritesRecipeCard extends Card {
   FavoritesRecipeCard({
     required Recipe recipe,
     required Function onPress,
-    required int index,
+    required Function onFavorite,
   }) : super(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
@@ -30,10 +30,10 @@ class FavoritesRecipeCard extends Card {
                     subtitle: Text('Ингридиенты: тесто, перец, ...'),
                     trailing: IconButton(
                       splashRadius: 15,
-                      onPressed: () {},
+                      onPressed: onFavorite(),
                       icon: Icon(
-                        Icons.star_border,
-                        color: Colors.black26,
+                        Icons.star,
+                        color: AppColors.appCherry,
                       ),
                     ),
                   )

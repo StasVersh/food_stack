@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_stack/app/core/values/database_constants.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:food_stack/app/data/model/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   late final FirebaseFirestore _firebaseDatabase;
@@ -17,13 +16,47 @@ class UserService {
       usersData.id,
       user.firstName,
       user.lustName,
-      user.favorits,
+      user.favorites,
     ));
+  }
+
+  Future addFavorite(Recipe recipe) async {
+    var userData = await _firebaseDatabase
+        .collection(DatabasePaths.usersPath)
+        .doc(DatabasePaths.userId)
+        .get();
+    List<String> favorits = List<String>.from(userData.get('favorites'));
+    favorits.add(recipe.id);
+    updateUsers(
+      User(
+        userData.get('id'),
+        userData.get('firstName'),
+        userData.get('lustName'),
+        favorits,
+      ),
+    );
+  }
+
+  Future removeFavorite(Recipe recipe, index) async {
+    var userData = await _firebaseDatabase
+        .collection(DatabasePaths.usersPath)
+        .doc(DatabasePaths.userId)
+        .get();
+    List<String> favorits = List<String>.from(userData.get('favorites'));
+    favorits.removeAt(index);
+    updateUsers(
+      User(
+        userData.get('id'),
+        userData.get('firstName'),
+        userData.get('lustName'),
+        favorits,
+      ),
+    );
   }
 
   Future updateUsers(User user) async {
     var recipeData = await _firebaseDatabase
-        .collection(DatabasePaths.recipePath)
+        .collection(DatabasePaths.usersPath)
         .doc(user.id)
         .update(user.toJson());
   }

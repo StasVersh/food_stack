@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-  //flutter pub run build_runner build
+  //flutter packages get -v
   final String firstName;
   final String lustName;
   final String id;
-  final List<String> favorits;
+  final List<String> favorites;
 
-  User(this.id, this.firstName, this.lustName, this.favorits);
+  User(this.id, this.firstName, this.lustName, this.favorites);
 
   factory User.fromDataset(QueryDocumentSnapshot dataSnapshot) {
     return User.fromJson(

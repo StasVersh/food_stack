@@ -23,4 +23,5 @@ abstract class LocaleKeys {
   static const desserts = 'Desserts';
   static const peppery = 'Peppery';
   static const fastFood = 'Fast food';
+  static const addRecipe = 'Add recipe';
 }
