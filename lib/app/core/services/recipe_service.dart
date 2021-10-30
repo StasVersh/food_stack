@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_stack/app/core/values/database_constants.dart';
-import 'package:food_stack/app/data/model/ingredient_type.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
-import 'package:food_stack/app/data/model/user.dart';
 
 class RecipeService {
   late final FirebaseFirestore _firebaseDatabase;
@@ -46,30 +44,28 @@ class RecipeService {
   Future<List<Recipe>> getFavoriteRecipe() async {
     var userData = await _firebaseDatabase
         .collection(DatabasePaths.usersPath)
-        .doc('5Sq0Ni0MQQOUG0T7K92k')
+        .doc(DatabasePaths.userId)
         .get();
     List<dynamic> recipesId = userData.get('favorites');
     recipesId = recipesId.cast<String>();
     List<Recipe> recipes = [];
-    recipesId.forEach(
-      (element) async {
-        var recipeData = await _firebaseDatabase
-            .collection(DatabasePaths.recipePath)
-            .doc(element)
-            .get();
-        List<String> ingredientsId =
-            List<String>.from(recipeData.get('ingredientsId'));
-        recipes.add(
-          Recipe(
-            recipeData.get('title'),
-            recipeData.get('body'),
-            ingredientsId,
-            recipeData.get('picture'),
-            recipeData.get('id'),
-          ),
-        );
-      },
-    );
+    for (var element in recipesId) {
+      var recipeData = await _firebaseDatabase
+          .collection(DatabasePaths.recipePath)
+          .doc(element)
+          .get();
+      List<String> ingredientsId =
+          List<String>.from(recipeData.get('ingredientsId'));
+      recipes.add(
+        Recipe(
+          recipeData.get('title'),
+          recipeData.get('body'),
+          ingredientsId,
+          recipeData.get('picture'),
+          recipeData.get('id'),
+        ),
+      );
+    }
     return recipes;
   }
 }

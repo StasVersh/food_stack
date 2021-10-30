@@ -10,9 +10,9 @@ class MainController extends GetxController {
   final selectedIconIndex = 2.obs;
   final List<Widget> pages = [
     SearchView(),
-    TopView(),
-    MyRecipesView(),
-    FavoritesView(),
+    const TopView(),
+    const MyRecipesView(),
+    const FavoritesView(),
     UserView(),
   ].obs;
 

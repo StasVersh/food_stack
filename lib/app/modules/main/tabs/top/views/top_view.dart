@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
+import 'package:food_stack/app/global_widgets/recipe_card.dart';
 import 'package:food_stack/app/modules/main/tabs/top/controllers/top_controller.dart';
-import 'package:food_stack/app/modules/main/tabs/top/widgets/recipe_card.dart';
 import 'package:get/get.dart';
 
 class TopView extends GetView<TopController> {
+  const TopView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +31,30 @@ class TopView extends GetView<TopController> {
                         ),
                         child: RecipeCard(
                           recipe: controller.recipes[index],
-                          index: index + 1,
-                          onPress: () {},
-                          onFavorites: () => controller.favorites(index),
+                          leading: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Center(
+                              child: Text(
+                                '${index + 1}',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                          trailing: SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Center(
+                              child: IconButton(
+                                splashRadius: 20,
+                                onPressed: () => controller.favorites(index),
+                                icon: const Icon(Icons.star_border),
+                                splashColor: Colors.black12,
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },

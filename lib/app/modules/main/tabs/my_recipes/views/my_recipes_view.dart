@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
+import 'package:food_stack/app/global_widgets/recipe_card.dart';
 import 'package:food_stack/app/modules/main/tabs/my_recipes/controllers/my_recipes_controller.dart';
-import 'package:food_stack/app/modules/main/tabs/my_recipes/widgets/my_recipe_card.dart';
 import 'package:get/get.dart';
 
 class MyRecipesView extends GetView<MyRecipesController> {
+  const MyRecipesView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +29,25 @@ class MyRecipesView extends GetView<MyRecipesController> {
                           left: 8.0,
                           right: 8.0,
                         ),
-                        child: MyRecipeCard(
+                        child: RecipeCard(
                           recipe: controller.recipes[index],
-                          index: index + 1456,
-                          onPress: () {
-                            controller.toRecipeReview(index);
-                          },
+                          leading: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Center(
+                              child: Text('${index + 3587}'),
+                            ),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(
+                                Icons.comment,
+                                size: 15,
+                              ),
+                              Text(' 173')
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -49,7 +64,7 @@ class MyRecipesView extends GetView<MyRecipesController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.addRecipe,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

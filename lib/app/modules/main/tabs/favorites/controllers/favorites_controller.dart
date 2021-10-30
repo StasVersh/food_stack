@@ -1,8 +1,6 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
-import 'package:food_stack/app/data/model/user.dart';
 import 'package:food_stack/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +34,6 @@ class FavoritesController extends GetxController {
   }
 
   Future<void> updateRecipes() {
-    recipes.clear();
     return _recipeService
         .getFavoriteRecipe()
         .then((value) => recipes.value = value);

@@ -1,9 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
-import 'package:food_stack/app/core/values/colors.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:food_stack/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -22,13 +18,6 @@ class TopController extends GetxController {
     }
   }
 
-  void toRecipeReview(int index) {
-    Get.toNamed(
-      Routes.RECIPEREVIEW,
-      arguments: recipes[index],
-    );
-  }
-
   void favorites(int index) {
     _userService.addFavorite(recipes[index]);
   }
@@ -40,7 +29,6 @@ class TopController extends GetxController {
   }
 
   Future<void> updateRecipes() {
-    recipes.clear();
     return _recipeService
         .getTopRecipes()
         .then((value) => recipes.value = value);

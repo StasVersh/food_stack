@@ -30,7 +30,6 @@ class MyRecipesController extends GetxController {
   }
 
   Future<void> updateRecipes() {
-    recipes.clear();
     return _recipeService.getMyRecipes().then((value) => recipes.value = value);
   }
 

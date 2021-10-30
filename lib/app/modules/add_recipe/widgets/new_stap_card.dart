@@ -29,6 +29,7 @@ class NewStepCard extends Card {
                 Expanded(
                   child: TextField(
                     onChanged: onChanged(),
+                    controller: controller,
                     decoration: const InputDecoration.collapsed(
                       hintText: 'Typing...',
                       hintStyle: TextStyle(

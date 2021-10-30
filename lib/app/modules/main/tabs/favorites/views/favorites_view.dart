@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/modules/main/tabs/favorites/controllers/favorites_controller.dart';
-import 'package:food_stack/app/modules/main/tabs/favorites/widgets/favorites_recipe_card.dart';
-import 'package:food_stack/app/modules/main/tabs/top/widgets/recipe_card.dart';
+import 'package:food_stack/app/global_widgets/recipe_card.dart';
 import 'package:get/get.dart';
 
 class FavoritesView extends GetView<FavoritesController> {
+  const FavoritesView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +29,23 @@ class FavoritesView extends GetView<FavoritesController> {
                           left: 8.0,
                           right: 8.0,
                         ),
-                        child: FavoritesRecipeCard(
+                        child: RecipeCard(
                           recipe: controller.recipes[index],
-                          onFavorite: () => controller.onFavorite(index),
-                          onPress: () {},
+                          trailing: SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Center(
+                              child: IconButton(
+                                splashRadius: 20,
+                                onPressed: () => controller.onFavorite(index),
+                                icon: const Icon(
+                                  Icons.star,
+                                  color: AppColors.appCherry,
+                                ),
+                                splashColor: Colors.black12,
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },

@@ -6,26 +6,28 @@ import 'package:food_stack/app/modules/main/tabs/user/widgets/settings_card.dart
 import 'package:get/get.dart';
 
 class UserView extends GetView<UserController> {
+  const UserView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: ListView(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: AppColors.appCherry,
                       radius: 55,
                     ),
                     Container(
                       height: 25,
                     ),
-                    Text(
+                    const Text(
                       'Станислав Вершилович',
                       style: TextStyle(
                         fontSize: 20,

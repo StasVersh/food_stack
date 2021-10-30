@@ -42,14 +42,14 @@ class UserService {
         .collection(DatabasePaths.usersPath)
         .doc(DatabasePaths.userId)
         .get();
-    List<String> favorits = List<String>.from(userData.get('favorites'));
-    favorits.removeAt(index);
+    List<String> favorites = List<String>.from(userData.get('favorites'));
+    favorites.removeAt(index);
     updateUsers(
       User(
         userData.get('id'),
         userData.get('firstName'),
         userData.get('lustName'),
-        favorits,
+        favorites,
       ),
     );
   }

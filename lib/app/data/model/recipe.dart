@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_stack/app/data/model/ingredient_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'recipe.g.dart';

@@ -7,6 +7,8 @@ import 'package:food_stack/app/modules/main/tabs/search/widgets/search_card.dart
 import 'package:get/get.dart';
 
 class SearchView extends GetView<SearchController> {
+  const SearchView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
