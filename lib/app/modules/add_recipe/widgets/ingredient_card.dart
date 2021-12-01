@@ -12,14 +12,14 @@ class IngredientCard extends Card {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
-          shadowColor: Colors.transparent,
           child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 50,
-                child: Center(
-                  child: Text(ingredient.name),
-                ),
-              )),
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 20,
+              child: Center(
+                child: Text(ingredient.name),
+              ),
+            ),
+          ),
         );
 }

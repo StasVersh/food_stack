@@ -7,13 +7,15 @@ part 'recipe.g.dart';
 class Recipe {
   //flutter pub run build_runner build
   final String title;
-  final String body;
+  final List<String> body;
+  final String creatorId;
   final List<String> ingredientsId;
   final String picture;
   final String id;
-  final DateTime createDate = DateTime.now();
+  final String createDate;
 
-  Recipe(this.title, this.body, this.ingredientsId, this.picture, this.id);
+  Recipe(this.title, this.body, this.ingredientsId, this.picture, this.id,
+      this.creatorId, this.createDate);
 
   factory Recipe.fromDataset(QueryDocumentSnapshot dataSnapshot) {
     return Recipe.fromJson(
@@ -23,4 +25,8 @@ class Recipe {
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
   Map<String, dynamic> toJson() => _$RecipeToJson(this);
+
+  String ingredientsToString() {
+    return '';
+  }
 }

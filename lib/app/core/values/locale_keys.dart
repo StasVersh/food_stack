@@ -23,5 +23,8 @@ abstract class LocaleKeys {
   static const desserts = 'Desserts';
   static const peppery = 'Peppery';
   static const fastFood = 'Fast food';
+  static const foodStack = 'FoodStack';
   static const addRecipe = 'Add recipe';
+  static const yes = 'Yes';
+  static const favoriteWarning = 'Are you sure you want to delete this recipe';
 }

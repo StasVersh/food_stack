@@ -26,7 +26,15 @@ class UserService {
         .doc(DatabasePaths.userId)
         .get();
     List<String> favorits = List<String>.from(userData.get('favorites'));
-    favorits.add(recipe.id);
+    bool isContaind = false;
+    favorits.forEach((element) {
+      if (element == recipe.id) {
+        isContaind = true;
+      }
+    });
+    if (!isContaind) {
+      favorits.add(recipe.id);
+    }
     updateUsers(
       User(
         userData.get('id'),
@@ -37,13 +45,21 @@ class UserService {
     );
   }
 
-  Future removeFavorite(Recipe recipe, index) async {
+  Future removeFavorite(Recipe recipe) async {
     var userData = await _firebaseDatabase
         .collection(DatabasePaths.usersPath)
         .doc(DatabasePaths.userId)
         .get();
     List<String> favorites = List<String>.from(userData.get('favorites'));
-    favorites.removeAt(index);
+    int? index;
+    for (int i = 0; i < favorites.length; i++) {
+      if (favorites[i] == recipe.id) {
+        index = i;
+      }
+    }
+    if (index != null) {
+      favorites.removeAt(index!);
+    }
     updateUsers(
       User(
         userData.get('id'),
@@ -66,5 +82,19 @@ class UserService {
         await _firebaseDatabase.collection(DatabasePaths.usersPath).get();
     var users = usersData.docs.map((e) => User.fromDataset(e)).toList();
     return users.reversed.toList();
+  }
+
+  Future<User> getUser() async {
+    var userData = await _firebaseDatabase
+        .collection(DatabasePaths.usersPath)
+        .doc(DatabasePaths.userId)
+        .get();
+    List<String> recipesId = List<String>.from(userData.get('favorites'));
+    return User(
+      userData.get('id'),
+      userData.get('firstName'),
+      userData.get('lustName'),
+      recipesId,
+    );
   }
 }

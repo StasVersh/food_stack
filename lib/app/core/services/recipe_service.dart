@@ -17,6 +17,8 @@ class RecipeService {
       recipe.ingredientsId,
       recipe.picture,
       recipeData.id,
+      recipe.creatorId,
+      recipe.createDate,
     ));
   }
 
@@ -56,16 +58,19 @@ class RecipeService {
           .get();
       List<String> ingredientsId =
           List<String>.from(recipeData.get('ingredientsId'));
+      List<String> body = List<String>.from(recipeData.get('body'));
       recipes.add(
         Recipe(
           recipeData.get('title'),
-          recipeData.get('body'),
+          body,
           ingredientsId,
           recipeData.get('picture'),
           recipeData.get('id'),
+          recipeData.get('creatorId'),
+          recipeData.get('createDate'),
         ),
       );
     }
-    return recipes;
+    return recipes.reversed.toList();
   }
 }

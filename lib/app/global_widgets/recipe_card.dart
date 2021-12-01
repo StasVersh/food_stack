@@ -7,6 +7,7 @@ class RecipeCard extends Card {
     required Recipe recipe,
     Widget? leading,
     Widget? trailing,
+    Widget? subtitle,
   }) : super(
           key: key,
           shape: RoundedRectangleBorder(
@@ -25,7 +26,7 @@ class RecipeCard extends Card {
                   ),
                   ListTile(
                     title: Text(recipe.title),
-                    subtitle: const Text('Ингридиенты: тесто, перец, ...'),
+                    subtitle: subtitle,
                     trailing: trailing,
                     leading: leading,
                   ),

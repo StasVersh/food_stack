@@ -8,6 +8,7 @@ class TopController extends GetxController {
   final RecipeService _recipeService;
   final UserService _userService;
   late final recipes = <Recipe>[].obs;
+  late final isFavorites = <bool>[].obs;
 
   TopController(this._recipeService, this._userService);
 
@@ -19,7 +20,12 @@ class TopController extends GetxController {
   }
 
   void favorites(int index) {
-    _userService.addFavorite(recipes[index]);
+    if (isFavorites[index]) {
+      _userService.removeFavorite(recipes[index]);
+    } else {
+      _userService.addFavorite(recipes[index]);
+    }
+    isFavorites[index] = !isFavorites[index];
   }
 
   @override
@@ -29,9 +35,21 @@ class TopController extends GetxController {
   }
 
   Future<void> updateRecipes() {
-    return _recipeService
-        .getTopRecipes()
-        .then((value) => recipes.value = value);
+    var isUpdateFavorites = <bool>[];
+    var recipe = _recipeService.getTopRecipes().then((recipeValue) {
+      _userService.getUser().then((value) {
+        recipes.forEach((recipeElement) {
+          bool isFavorite = false;
+          value.favorites.forEach((element) {
+            if (recipeElement.id == element) isFavorite = true;
+          });
+          isUpdateFavorites.add(isFavorite);
+        });
+        recipes.value = recipeValue;
+        isFavorites.value = isUpdateFavorites;
+      });
+    });
+    return recipe;
   }
 
   @override

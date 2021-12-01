@@ -47,12 +47,27 @@ class TopView extends GetView<TopController> {
                             height: 40,
                             width: 40,
                             child: Center(
-                              child: IconButton(
-                                splashRadius: 20,
-                                onPressed: () => controller.favorites(index),
-                                icon: const Icon(Icons.star_border),
-                                splashColor: Colors.black12,
-                              ),
+                              child: Obx(() {
+                                return IconButton(
+                                  splashRadius: 20,
+                                  onPressed: () => controller.favorites(index),
+                                  icon: controller.isFavorites.isNotEmpty
+                                      ? controller.isFavorites[index]
+                                          ? const Icon(
+                                              Icons.star,
+                                              color: AppColors.appCherry,
+                                            )
+                                          : const Icon(
+                                              Icons.star_border,
+                                              color: Colors.black26,
+                                            )
+                                      : const Icon(
+                                          Icons.star_border,
+                                          color: Colors.black26,
+                                        ),
+                                  splashColor: Colors.black12,
+                                );
+                              }),
                             ),
                           ),
                         ),
@@ -72,3 +87,7 @@ class TopView extends GetView<TopController> {
     );
   }
 }
+// const Icon(
+// Icons.star_border,
+// color: Colors.black26,
+// ),

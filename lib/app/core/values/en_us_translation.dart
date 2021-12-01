@@ -28,4 +28,7 @@ final Map<String, String> en_UK = {
   LocaleKeys.peppery: 'Peppery',
   LocaleKeys.fastFood: 'Fast food',
   LocaleKeys.addRecipe: 'Add recipe',
+  LocaleKeys.yes: 'Yes',
+  LocaleKeys.favoriteWarning:
+      'Are you sure you want to remove this recipe from your favorites?',
 };

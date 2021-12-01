@@ -26,4 +26,7 @@ final Map<String, String> ru_RU = {
   LocaleKeys.peppery: 'Острое',
   LocaleKeys.fastFood: 'Фаст-фуд',
   LocaleKeys.addRecipe: 'Создание рецепта',
+  LocaleKeys.yes: 'Да',
+  LocaleKeys.favoriteWarning:
+      'Вы действиетльно хотите удалить этот рецепт из избранного?',
 };

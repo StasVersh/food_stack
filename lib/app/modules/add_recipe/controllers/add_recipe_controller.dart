@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/services/ingredients_service.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
+import 'package:food_stack/app/core/services/storage_service.dart';
+import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/database_constants.dart';
 import 'package:food_stack/app/data/model/ingredient.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:get/get.dart';
@@ -8,24 +14,108 @@ import 'package:get/get.dart';
 class AddRecipeController extends GetxController {
   final RecipeService _recipeService;
   final IngredientsService _ingredientsService;
+  final StorageService _storageService;
   var title = '';
-  late final body = <String>[''].obs;
-  final imageSrc =
-      'https://cdn.asiatatler.com/asiatatler/i/ph/2021/05/07105034-gettyimages-1257260385_cover_1280x764.jpg'
-          .obs;
-  var textEditingController = TextEditingController().obs;
-  final ingredients = <Ingredient>[].obs;
+  var body = <String>[];
+  var imageSrc =
+      'https://firebasestorage.googleapis.com/v0/b/foodstack-cf1df.appspot.com/o/images%2Fcake-2532303_1280.jpg?alt=media&token=59242eb0-9de1-4efc-bf32-91fc0bcbd6bd';
+  var textEditingControllers = <TextEditingController>[].obs;
+  var listViewController = ScrollController().obs;
+  var ingredients = <Ingredient>[];
+  final unselected = <Ingredient>[].obs;
+  final selected = <Ingredient>[].obs;
   var ingredientsId = <String>[];
-  AddRecipeController(this._recipeService, this._ingredientsService);
+  var imageAdded = false.obs;
+  var file = File('').obs;
+  AddRecipeController(
+      this._recipeService, this._ingredientsService, this._storageService)
+      : super() {}
 
-  void save() {
-    var newRecipe =
-        Recipe(title, body.value[0], ingredientsId, imageSrc.value, '');
-    _recipeService.addRecipe(newRecipe);
-    List<String> favorites = [newRecipe.id];
-    Get.back<Recipe>(
-      result: Recipe(title, body.value[0], ingredientsId, imageSrc.value, ''),
+  void save(context) async {
+    for (var element in textEditingControllers) {
+      if (element.text != '') body.add(element.text);
+    }
+    for (var element in selected) {
+      ingredientsId.add(element.id);
+    }
+    if (imageAdded.value) {
+      _storageService.uploadFile(file.value).then((value) {
+        imageSrc = value;
+        var newRecipe = Recipe(
+          title,
+          body,
+          ingredientsId,
+          imageSrc,
+          '',
+          DatabasePaths.userId,
+          '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+        );
+        _recipeService.addRecipe(newRecipe);
+        Get.back();
+        Get.back<Recipe>(
+          result: newRecipe,
+        );
+      });
+      var dialog = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(18.0)),
+              ),
+              title: Text(
+                'Сохранение...',
+              ),
+              content: SizedBox(
+                height: 100,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.appCherry,
+                    strokeWidth: 6,
+                  ),
+                ),
+              ),
+            );
+          });
+    } else {
+      var newRecipe = Recipe(
+        title,
+        body,
+        ingredientsId,
+        imageSrc,
+        '',
+        DatabasePaths.userId,
+        '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+      );
+      _recipeService.addRecipe(newRecipe);
+      Get.back<Recipe>(
+        result: newRecipe,
+      );
+    }
+  }
+
+  void ingredientTap(index) {
+    var ingredient = unselected[index];
+    unselected.remove(ingredient);
+    selected.add(ingredient);
+  }
+
+  void selectedTap(index) {
+    var ingredient = selected[index];
+    selected.remove(ingredient);
+    unselected.add(ingredient);
+    unselected.sort((a, b) => a.name.compareTo(b.name));
+  }
+
+  Future<void> imageSelectorTap() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'png'],
     );
+    if (result != null) {
+      file.value = File(result.files.single.path!);
+      imageAdded.value = true;
+    }
   }
 
   void createIngredient(BuildContext context) async {
@@ -34,26 +124,51 @@ class AddRecipeController extends GetxController {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Создание рецепта'),
-          content: TextField(
-            controller: controller,
-            decoration: InputDecoration.collapsed(
-              hintText: 'Название ингридиента...',
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+          ),
+          title: const Text(
+            'Создание ингридиента',
+          ),
+          content: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                textCapitalization: TextCapitalization.sentences,
+                controller: controller,
+                cursorColor: AppColors.appCherry,
+                decoration: const InputDecoration.collapsed(
+                  hintText: 'Название ингридиента...',
+                  hintStyle: TextStyle(
+                    color: Colors.black26,
+                  ),
+                ),
+              ),
             ),
           ),
           actions: [
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
+              style: TextButton.styleFrom(
+                primary: AppColors.appCherry,
+              ),
               onPressed: () {
                 List<String> recipeId = [];
                 _ingredientsService
                     .addIngredient(Ingredient('', recipeId, controller.text));
-                ingredients.add(Ingredient('', recipeId, controller.text));
+                selected.add(Ingredient('', recipeId, controller.text));
+                updateIngredients();
                 Get.back();
               },
             ),
             TextButton(
               child: Text('Back'),
+              style: TextButton.styleFrom(
+                primary: AppColors.appCherry,
+              ),
               onPressed: () {
                 Get.back();
               },
@@ -64,18 +179,40 @@ class AddRecipeController extends GetxController {
     );
   }
 
-  void onEditingChanged() {}
+  void onEditingChanged(index) {
+    if (index == textEditingControllers.length - 1) {
+      textEditingControllers.add(TextEditingController());
+    }
+    if (textEditingControllers[index].text == '' &&
+        textEditingControllers.length > 1) {
+      textEditingControllers.removeAt(index);
+    }
+  }
+
+  void onSearchChanged(value) {
+    var filtered = <Ingredient>[];
+    ingredients.where((p0) => p0.name.contains(value)).forEach((element) {
+      filtered.add(element);
+    });
+    unselected.value = filtered;
+  }
 
   @override
   void onInit() {
+    textEditingControllers.add(TextEditingController());
     updateIngredients();
     super.onInit();
   }
 
   void updateIngredients() {
-    _ingredientsService
-        .getIngredients()
-        .then((value) => ingredients.value = value);
+    _ingredientsService.getIngredients().then((value) {
+      ingredients = value;
+      ingredients.sort((a, b) => a.name.compareTo(b.name));
+      for (var element in selected) {
+        ingredients.remove(element);
+      }
+      unselected.value = ingredients;
+    });
   }
 
   @override

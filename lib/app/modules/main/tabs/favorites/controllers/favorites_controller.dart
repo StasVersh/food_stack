@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
+import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:food_stack/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -25,7 +28,33 @@ class FavoritesController extends GetxController {
     );
   }
 
-  void onFavorite(index) {}
+  void onFavorite(index, context) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: AppColors.appCherry,
+        content: ListTile(
+          title: Text(
+            LocaleKeys.favoriteWarning.tr,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          leading: const Icon(
+            Icons.warning,
+            color: Colors.white,
+          ),
+          trailing: TextButton(
+            onPressed: () {
+              _userService.removeFavorite(recipes[index]);
+              recipes.removeAt(index);
+              Scaffold.of(context).removeCurrentSnackBar();
+            },
+            child: Text(LocaleKeys.yes.tr),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   void onInit() {
@@ -41,6 +70,7 @@ class FavoritesController extends GetxController {
 
   @override
   void onReady() {
+    updateRecipes();
     super.onReady();
   }
 
