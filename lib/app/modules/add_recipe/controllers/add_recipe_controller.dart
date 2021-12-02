@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:food_stack/app/core/services/ingredients_service.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/storage_service.dart';
@@ -15,21 +16,24 @@ class AddRecipeController extends GetxController {
   final RecipeService _recipeService;
   final IngredientsService _ingredientsService;
   final StorageService _storageService;
+  final unselected = <Ingredient>[].obs;
+  final selected = <Ingredient>[].obs;
+  final isVisible = false.obs;
+  var imageAdded = false.obs;
+  var ingredients = <Ingredient>[];
+  var listViewController = ScrollController().obs;
+  var textEditingControllers = <TextEditingController>[].obs;
+  var listViewPosition = 0;
+
   var title = '';
   var body = <String>[];
   var imageSrc =
       'https://firebasestorage.googleapis.com/v0/b/foodstack-cf1df.appspot.com/o/images%2Fcake-2532303_1280.jpg?alt=media&token=59242eb0-9de1-4efc-bf32-91fc0bcbd6bd';
-  var textEditingControllers = <TextEditingController>[].obs;
-  var listViewController = ScrollController().obs;
-  var ingredients = <Ingredient>[];
-  final unselected = <Ingredient>[].obs;
-  final selected = <Ingredient>[].obs;
-  var ingredientsId = <String>[];
-  var imageAdded = false.obs;
   var file = File('').obs;
+  var ingredientsId = <String>[];
+
   AddRecipeController(
-      this._recipeService, this._ingredientsService, this._storageService)
-      : super() {}
+      this._recipeService, this._ingredientsService, this._storageService);
 
   void save(context) async {
     for (var element in textEditingControllers) {
@@ -179,6 +183,17 @@ class AddRecipeController extends GetxController {
     );
   }
 
+  bool listViewChanged(notification, context) {
+    print(isVisible);
+    if (listViewController.value.position.pixels >
+        MediaQuery.of(context).size.height / 2) {
+      isVisible.value = true;
+    } else {
+      isVisible.value = false;
+    }
+    return true;
+  }
+
   void onEditingChanged(index) {
     if (index == textEditingControllers.length - 1) {
       textEditingControllers.add(TextEditingController());
@@ -202,6 +217,14 @@ class AddRecipeController extends GetxController {
     textEditingControllers.add(TextEditingController());
     updateIngredients();
     super.onInit();
+  }
+
+  Future<void> jumpToStart() async {
+    await listViewController.value.animateTo(
+      0.0,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 200),
+    );
   }
 
   void updateIngredients() {
