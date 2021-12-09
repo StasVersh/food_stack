@@ -29,21 +29,24 @@ class FavoritesView extends GetView<FavoritesController> {
                             left: 8.0,
                             right: 8.0,
                           ),
-                          child: RecipeCard(
-                            recipe: controller.recipes[index],
-                            trailing: SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: IconButton(
-                                  splashRadius: 20,
-                                  onPressed: () =>
-                                      controller.onFavorite(index, context),
-                                  icon: const Icon(
-                                    Icons.star,
-                                    color: AppColors.appCherry,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: RecipeCard(
+                              recipe: controller.recipes[index],
+                              trailing: SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Center(
+                                  child: IconButton(
+                                    splashRadius: 20,
+                                    onPressed: () =>
+                                        controller.onFavorite(index, context),
+                                    icon: const Icon(
+                                      Icons.star,
+                                      color: AppColors.appCherry,
+                                    ),
+                                    splashColor: Colors.black12,
                                   ),
-                                  splashColor: Colors.black12,
                                 ),
                               ),
                             ),

@@ -5,7 +5,7 @@ class RecipeReviewBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<RecipeReviewController>(
-      () => RecipeReviewController(Get.find()),
+      () => RecipeReviewController(),
     );
   }
 }
