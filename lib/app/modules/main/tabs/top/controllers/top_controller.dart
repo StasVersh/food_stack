@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
@@ -12,11 +13,11 @@ class TopController extends GetxController {
 
   TopController(this._recipeService, this._userService);
 
-  void addRecipe() async {
-    var newRecipe = await Get.toNamed(Routes.ADDRECIPE);
-    if (newRecipe != null) {
-      recipes.add(newRecipe);
-    }
+  void goToView(index) {
+    Get.toNamed(
+      Routes.RECIPEREVIEW,
+      arguments: recipes[index],
+    );
   }
 
   void favorites(int index) {

@@ -29,45 +29,49 @@ class TopView extends GetView<TopController> {
                           left: 8.0,
                           right: 8.0,
                         ),
-                        child: RecipeCard(
-                          recipe: controller.recipes[index],
-                          leading: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Center(
-                              child: Text(
-                                '${index + 1}',
-                                style: const TextStyle(
-                                  fontSize: 18,
+                        child: GestureDetector(
+                          onTap: () => controller.goToView(index),
+                          child: RecipeCard(
+                            recipe: controller.recipes[index],
+                            leading: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                  '${index + 1}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          trailing: SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Obx(() {
-                                return IconButton(
-                                  splashRadius: 20,
-                                  onPressed: () => controller.favorites(index),
-                                  icon: controller.isFavorites.isNotEmpty
-                                      ? controller.isFavorites[index]
-                                          ? const Icon(
-                                              Icons.star,
-                                              color: AppColors.appCherry,
-                                            )
-                                          : const Icon(
-                                              Icons.star_border,
-                                              color: Colors.black26,
-                                            )
-                                      : const Icon(
-                                          Icons.star_border,
-                                          color: Colors.black26,
-                                        ),
-                                  splashColor: Colors.black12,
-                                );
-                              }),
+                            trailing: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Obx(() {
+                                  return IconButton(
+                                    splashRadius: 20,
+                                    onPressed: () =>
+                                        controller.favorites(index),
+                                    icon: controller.isFavorites.isNotEmpty
+                                        ? controller.isFavorites[index]
+                                            ? const Icon(
+                                                Icons.star,
+                                                color: AppColors.appCherry,
+                                              )
+                                            : const Icon(
+                                                Icons.star_border,
+                                                color: Colors.black26,
+                                              )
+                                        : const Icon(
+                                            Icons.star_border,
+                                            color: Colors.black26,
+                                          ),
+                                    splashColor: Colors.black12,
+                                  );
+                                }),
+                              ),
                             ),
                           ),
                         ),
