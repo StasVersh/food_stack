@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:get/get.dart';
 import '../controllers/add_recipe_controller.dart';
@@ -17,7 +18,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
         actions: [
           IconButton(
             onPressed: () => controller.save(context),
-            icon: const Icon(Icons.save),
+            icon: const Icon(IconsData.save),
           )
         ],
       ),
@@ -42,16 +43,16 @@ class AddRecipeView extends GetView<AddRecipeController> {
                               borderRadius: BorderRadius.circular(18),
                               child: Image.file(controller.file.value),
                             )
-                          : Container(
+                          : SizedBox(
                               height: 200,
                               child: Center(
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.add),
+                                  children: [
+                                    const Icon(IconsData.add),
                                     Text(
-                                      'Add Image',
-                                      style: TextStyle(
+                                      LocaleKeys.addImage.tr,
+                                      style: const TextStyle(
                                         fontSize: 18,
                                       ),
                                     ),
@@ -78,10 +79,10 @@ class AddRecipeView extends GetView<AddRecipeController> {
                       fontSize: 20,
                     ),
                     onChanged: (var value) => controller.title = value,
-                    decoration: const InputDecoration.collapsed(
-                      hintText: 'Title...',
-                      hintStyle: TextStyle(
-                        color: Colors.black26,
+                    decoration: InputDecoration.collapsed(
+                      hintText: LocaleKeys.title.tr,
+                      hintStyle: const TextStyle(
+                        color: AppColors.appGray,
                       ),
                     ),
                   ),
@@ -98,11 +99,11 @@ class AddRecipeView extends GetView<AddRecipeController> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(15.0),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        'Recipe: ',
-                        style: TextStyle(
+                        LocaleKeys.recipe.tr,
+                        style: const TextStyle(
                           fontSize: 16,
                         ),
                       ),
@@ -129,7 +130,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 50,
                                       child: Center(
                                         child: Text('${index + 1}. '),
@@ -145,11 +146,10 @@ class AddRecipeView extends GetView<AddRecipeController> {
                                             controller.onEditingChanged(index),
                                         controller: controller
                                             .textEditingControllers[index],
-                                        decoration:
-                                            const InputDecoration.collapsed(
-                                          hintText: 'Typing...',
-                                          hintStyle: TextStyle(
-                                            color: Colors.black26,
+                                        decoration: InputDecoration.collapsed(
+                                          hintText: LocaleKeys.typing.tr,
+                                          hintStyle: const TextStyle(
+                                            color: AppColors.appGray,
                                           ),
                                         ),
                                       ),
@@ -180,7 +180,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
                     const Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Text(
-                        'Ingredients: ',
+                        LocaleKeys.ingredients,
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -192,7 +192,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
                       ),
                       child: ListTile(
                         leading: const Icon(
-                          Icons.search,
+                          IconsData.search,
                           color: AppColors.appCherry,
                         ),
                         title: TextField(
@@ -209,7 +209,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
                       () {
                         return ListView.builder(
                           scrollDirection: Axis.vertical,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
@@ -226,13 +226,13 @@ class AddRecipeView extends GetView<AddRecipeController> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 20,
                                       child: Center(
                                         child: Text(
                                           controller.selected[index].name,
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                          style: const TextStyle(
+                                            color: AppColors.appWhite,
                                           ),
                                         ),
                                       ),
@@ -252,7 +252,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
                           child: Expanded(
                             child: ListView.builder(
                               scrollDirection: Axis.vertical,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
@@ -264,19 +264,19 @@ class AddRecipeView extends GetView<AddRecipeController> {
                                     onTap: () =>
                                         controller.ingredientTap(index),
                                     child: Card(
-                                      color: Colors.white,
+                                      color: AppColors.appWhite,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(18),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 20,
                                           child: Center(
                                             child: Text(
                                               controller.unselected[index].name,
-                                              style: TextStyle(
-                                                color: Colors.black,
+                                              style: const TextStyle(
+                                                color: AppColors.appBlack,
                                               ),
                                             ),
                                           ),
@@ -308,10 +308,10 @@ class AddRecipeView extends GetView<AddRecipeController> {
                                 child: ListTile(
                                   onTap: () =>
                                       controller.createIngredient(context),
-                                  title: const Text(
-                                    'Создать ингредиент',
+                                  title: Text(
+                                    LocaleKeys.createIngredients.tr,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: AppColors.appCherry,
                                     ),
                                   ),
@@ -337,7 +337,7 @@ class AddRecipeView extends GetView<AddRecipeController> {
           return controller.isVisible.value
               ? FloatingActionButton(
                   onPressed: controller.jumpToStart,
-                  child: Icon(Icons.arrow_upward),
+                  child: const Icon(IconsData.arrowUp),
                 )
               : Container();
         },

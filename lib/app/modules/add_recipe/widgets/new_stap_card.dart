@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
-import 'package:food_stack/app/data/model/recipe.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:food_stack/app/core/values/locale_keys.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class NewStepCard extends Card {
   NewStepCard({
+    Key? key,
     required int index,
     required TextEditingController controller,
     required Function onChanged,
   }) : super(
+          key: key,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
@@ -20,7 +21,7 @@ class NewStepCard extends Card {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: 50,
                   child: Center(
                     child: Text('$index. '),
@@ -30,10 +31,10 @@ class NewStepCard extends Card {
                   child: TextField(
                     onChanged: onChanged(),
                     controller: controller,
-                    decoration: const InputDecoration.collapsed(
-                      hintText: 'Typing...',
-                      hintStyle: TextStyle(
-                        color: Colors.black26,
+                    decoration: InputDecoration.collapsed(
+                      hintText: LocaleKeys.typing.tr,
+                      hintStyle: const TextStyle(
+                        color: AppColors.appGray,
                       ),
                     ),
                   ),

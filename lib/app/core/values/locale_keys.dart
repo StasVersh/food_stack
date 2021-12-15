@@ -27,4 +27,10 @@ abstract class LocaleKeys {
   static const addRecipe = 'Add recipe';
   static const yes = 'Yes';
   static const favoriteWarning = 'Are you sure you want to delete this recipe';
+  static const typing = 'Typing...';
+  static const addImage = 'Add Image';
+  static const title = 'Title...';
+  static const recipe = 'Recipe: ';
+  static const ingredients = 'Ingredients: ';
+  static const createIngredients = 'Create ingredient';
 }

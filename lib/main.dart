@@ -27,7 +27,7 @@ void main() async {
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
+  await init();
   Intl.defaultLocale = ui.window.locale.toLanguageTag();
   runApp(
     GetMaterialApp(
@@ -39,7 +39,6 @@ void main() async {
       localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
       supportedLocales: const [Locale('en'), Locale('ru')],
       theme: ThemeData(
-        primaryColor: Colors.purple,
         accentColor: AppColors.appCherry,
         secondaryHeaderColor: AppColors.appCherry,
         splashColor: AppColors.appCherry,
@@ -49,7 +48,7 @@ void main() async {
 }
 
 ///Init global services.
-Future initServices() async {
+Future init() async {
   await Get.putAsync<FirebaseApp>(() async => await Firebase.initializeApp(),
       permanent: true);
   Get.put<FirebaseFirestore>(FirebaseFirestore.instance, permanent: true);

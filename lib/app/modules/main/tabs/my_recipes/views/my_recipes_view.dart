@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/global_widgets/recipe_card.dart';
 import 'package:food_stack/app/modules/main/tabs/my_recipes/controllers/my_recipes_controller.dart';
@@ -42,7 +43,7 @@ class MyRecipesView extends GetView<MyRecipesController> {
                             mainAxisSize: MainAxisSize.min,
                             children: const [
                               Icon(
-                                Icons.comment,
+                                IconsData.comment,
                                 size: 15,
                               ),
                               Text(' 173')
@@ -64,7 +65,7 @@ class MyRecipesView extends GetView<MyRecipesController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.addRecipe,
-        child: const Icon(Icons.add),
+        child: const Icon(IconsData.add),
       ),
     );
   }

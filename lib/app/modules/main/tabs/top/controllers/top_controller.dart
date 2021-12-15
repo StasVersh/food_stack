@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
@@ -29,35 +28,31 @@ class TopController extends GetxController {
     isFavorites[index] = !isFavorites[index];
   }
 
+  Future<void> updateRecipes() {
+    var isUpdateFavorites = <bool>[];
+    var recipe = _recipeService.getTopRecipes().then(
+      (recipeValue) {
+        _userService.getUser().then(
+          (value) {
+            for (var recipeElement in recipes) {
+              bool isFavorite = false;
+              for (var element in value.favorites) {
+                if (recipeElement.id == element) isFavorite = true;
+              }
+              isUpdateFavorites.add(isFavorite);
+            }
+            recipes.value = recipeValue;
+            isFavorites.value = isUpdateFavorites;
+          },
+        );
+      },
+    );
+    return recipe;
+  }
+
   @override
   void onInit() {
     updateRecipes();
     super.onInit();
   }
-
-  Future<void> updateRecipes() {
-    var isUpdateFavorites = <bool>[];
-    var recipe = _recipeService.getTopRecipes().then((recipeValue) {
-      _userService.getUser().then((value) {
-        recipes.forEach((recipeElement) {
-          bool isFavorite = false;
-          value.favorites.forEach((element) {
-            if (recipeElement.id == element) isFavorite = true;
-          });
-          isUpdateFavorites.add(isFavorite);
-        });
-        recipes.value = recipeValue;
-        isFavorites.value = isUpdateFavorites;
-      });
-    });
-    return recipe;
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
 }

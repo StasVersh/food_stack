@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/modules/main/tabs/search/controllers/search_controller.dart';
 import 'package:food_stack/app/modules/main/tabs/search/widgets/search_card.dart';
@@ -48,7 +48,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.forBreakfast.tr,
-                icon: FontAwesomeIcons.coffee,
+                icon: IconsData.coffee,
               ),
             ),
             Padding(
@@ -58,7 +58,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.forLunch.tr,
-                icon: FontAwesomeIcons.utensils,
+                icon: IconsData.utensils,
               ),
             ),
             Padding(
@@ -68,7 +68,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.forDinner.tr,
-                icon: FontAwesomeIcons.conciergeBell,
+                icon: IconsData.conciergeBell,
               ),
             ),
             Padding(
@@ -78,7 +78,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.student.tr,
-                icon: FontAwesomeIcons.graduationCap,
+                icon: IconsData.graduationCap,
               ),
             ),
             const Padding(
@@ -92,7 +92,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.dishes.tr,
-                icon: Icons.dinner_dining,
+                icon: IconsData.dinner,
               ),
             ),
             Padding(
@@ -102,7 +102,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.bakery.tr,
-                icon: FontAwesomeIcons.breadSlice,
+                icon: IconsData.bread,
               ),
             ),
             Padding(
@@ -112,7 +112,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.salads.tr,
-                icon: FontAwesomeIcons.carrot,
+                icon: IconsData.carrot,
               ),
             ),
             Padding(
@@ -122,7 +122,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.meat.tr,
-                icon: FontAwesomeIcons.drumstickBite,
+                icon: IconsData.drumstickBite,
               ),
             ),
             Padding(
@@ -132,7 +132,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.fish.tr,
-                icon: FontAwesomeIcons.fish,
+                icon: IconsData.fish,
               ),
             ),
             Padding(
@@ -142,7 +142,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.desserts.tr,
-                icon: FontAwesomeIcons.cheese,
+                icon: IconsData.cheese,
               ),
             ),
             Padding(
@@ -152,7 +152,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.peppery.tr,
-                icon: FontAwesomeIcons.pepperHot,
+                icon: IconsData.pepperHot,
               ),
             ),
             Padding(
@@ -162,7 +162,7 @@ class SearchView extends GetView<SearchController> {
               ),
               child: SearchCard(
                 title: LocaleKeys.fastFood.tr,
-                icon: FontAwesomeIcons.hamburger,
+                icon: IconsData.hamburger,
               ),
             ),
           ],

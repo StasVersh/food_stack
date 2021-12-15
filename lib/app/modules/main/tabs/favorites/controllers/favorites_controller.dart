@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/services/recipe_service.dart';
 import 'package:food_stack/app/core/services/user_service.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/data/model/recipe.dart';
 import 'package:food_stack/app/routes/app_pages.dart';
@@ -35,13 +36,13 @@ class FavoritesController extends GetxController {
         content: ListTile(
           title: Text(
             LocaleKeys.favoriteWarning.tr,
-            style: TextStyle(
-              color: Colors.white,
+            style: const TextStyle(
+              color: AppColors.appWhite,
             ),
           ),
           leading: const Icon(
-            Icons.warning,
-            color: Colors.white,
+            IconsData.warning,
+            color: AppColors.appWhite,
           ),
           trailing: TextButton(
             onPressed: () {
@@ -56,12 +57,6 @@ class FavoritesController extends GetxController {
     );
   }
 
-  @override
-  void onInit() {
-    updateRecipes();
-    super.onInit();
-  }
-
   Future<void> updateRecipes() {
     return _recipeService
         .getFavoriteRecipe()
@@ -69,11 +64,8 @@ class FavoritesController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onInit() {
     updateRecipes();
-    super.onReady();
+    super.onInit();
   }
-
-  @override
-  void onClose() {}
 }

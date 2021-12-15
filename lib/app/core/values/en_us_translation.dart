@@ -31,4 +31,10 @@ final Map<String, String> en_UK = {
   LocaleKeys.yes: 'Yes',
   LocaleKeys.favoriteWarning:
       'Are you sure you want to remove this recipe from your favorites?',
+  LocaleKeys.typing: 'Typing...',
+  LocaleKeys.addImage: 'Add Image',
+  LocaleKeys.title: 'Title...',
+  LocaleKeys.recipe: 'Recipe: ',
+  LocaleKeys.ingredients: 'Ingredients: ',
+  LocaleKeys.createIngredients: 'Create ingredient',
 };

@@ -23,21 +23,13 @@ class MyRecipesController extends GetxController {
     );
   }
 
-  @override
-  void onInit() {
-    updateRecipes();
-    super.onInit();
-  }
-
   Future<void> updateRecipes() {
     return _recipeService.getMyRecipes().then((value) => recipes.value = value);
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    updateRecipes();
+    super.onInit();
   }
-
-  @override
-  void onClose() {}
 }

@@ -29,4 +29,10 @@ final Map<String, String> ru_RU = {
   LocaleKeys.yes: 'Да',
   LocaleKeys.favoriteWarning:
       'Вы действиетльно хотите удалить этот рецепт из избранного?',
+  LocaleKeys.typing: 'Пишите...',
+  LocaleKeys.addImage: 'Добавить фото',
+  LocaleKeys.title: 'Название...',
+  LocaleKeys.recipe: 'Рецепт: ',
+  LocaleKeys.ingredients: 'Ингредиенты:',
+  LocaleKeys.createIngredients: 'Создать ингредиент',
 };

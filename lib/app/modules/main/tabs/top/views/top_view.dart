@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/global_widgets/recipe_card.dart';
 import 'package:food_stack/app/modules/main/tabs/top/controllers/top_controller.dart';
@@ -49,28 +50,30 @@ class TopView extends GetView<TopController> {
                               height: 40,
                               width: 40,
                               child: Center(
-                                child: Obx(() {
-                                  return IconButton(
-                                    splashRadius: 20,
-                                    onPressed: () =>
-                                        controller.favorites(index),
-                                    icon: controller.isFavorites.isNotEmpty
-                                        ? controller.isFavorites[index]
-                                            ? const Icon(
-                                                Icons.star,
-                                                color: AppColors.appCherry,
-                                              )
-                                            : const Icon(
-                                                Icons.star_border,
-                                                color: Colors.black26,
-                                              )
-                                        : const Icon(
-                                            Icons.star_border,
-                                            color: Colors.black26,
-                                          ),
-                                    splashColor: Colors.black12,
-                                  );
-                                }),
+                                child: Obx(
+                                  () {
+                                    return IconButton(
+                                      splashRadius: 20,
+                                      onPressed: () =>
+                                          controller.favorites(index),
+                                      icon: controller.isFavorites.isNotEmpty
+                                          ? controller.isFavorites[index]
+                                              ? const Icon(
+                                                  IconsData.star,
+                                                  color: AppColors.appCherry,
+                                                )
+                                              : const Icon(
+                                                  IconsData.starBorder,
+                                                  color: AppColors.appGray,
+                                                )
+                                          : const Icon(
+                                              IconsData.starBorder,
+                                              color: AppColors.appGray,
+                                            ),
+                                      splashColor: AppColors.appGray,
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -91,7 +94,3 @@ class TopView extends GetView<TopController> {
     );
   }
 }
-// const Icon(
-// Icons.star_border,
-// color: Colors.black26,
-// ),

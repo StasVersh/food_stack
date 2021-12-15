@@ -9,29 +9,14 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   final selectedIconIndex = 2.obs;
   final List<Widget> pages = [
-    SearchView(),
+    const SearchView(),
     const TopView(),
     const MyRecipesView(),
     const FavoritesView(),
-    UserView(),
+    const UserView(),
   ].obs;
 
   void onTapIcon(int index) {
     selectedIconIndex.value = index;
   }
-
-  MainController();
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
 }

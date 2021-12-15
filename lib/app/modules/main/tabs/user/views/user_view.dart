@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_stack/app/core/values/colors.dart';
+import 'package:food_stack/app/core/values/icons_path.dart';
 import 'package:food_stack/app/core/values/locale_keys.dart';
 import 'package:food_stack/app/modules/main/tabs/user/controllers/user_controller.dart';
 import 'package:food_stack/app/modules/main/tabs/user/widgets/settings_card.dart';
@@ -44,7 +45,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.profile.tr,
-                icon: Icons.list,
+                icon: IconsData.list,
               ),
             ),
             Padding(
@@ -54,7 +55,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.favoriteIngredients.tr,
-                icon: Icons.favorite_border,
+                icon: IconsData.favorite,
               ),
             ),
             Padding(
@@ -64,7 +65,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.blackList.tr,
-                icon: Icons.block,
+                icon: IconsData.block,
               ),
             ),
             Padding(
@@ -74,7 +75,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.languages.tr,
-                icon: Icons.language,
+                icon: IconsData.language,
               ),
             ),
             Padding(
@@ -84,7 +85,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.privacyPolicy.tr,
-                icon: Icons.verified_user_outlined,
+                icon: IconsData.verified,
               ),
             ),
             Padding(
@@ -94,7 +95,7 @@ class UserView extends GetView<UserController> {
               ),
               child: SettingsCard(
                 title: LocaleKeys.about.tr,
-                icon: Icons.info_outline,
+                icon: IconsData.info,
               ),
             ),
           ],
